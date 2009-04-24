@@ -1,0 +1,31 @@
+
+\bigskip 
+{\bfseries Существующий в SELinux метод динамического 
+переключения контекста} 
+
+В 2004-м году в SELinux началась работа над системой 
+интерфейсов для пользовательских приложений, позволяющих
+приложениям динамически изменять свой контекст. Данная 
+система предполагает, что приложение должно быть тесно 
+интегрировано с существующей политикой и в зависимости 
+от своего текущего состояния сообщать SELinux о смене 
+контекста. Такой подход позволил бы создавать более 
+безопасные приложения, при разработке которых возможно
+было бы выделять состония, в которых приложению нужны
+различные минимальные права. Такими интерфейсами стали 
+функции 
+
+\bigskip 
+\begin{lstlisting} 
+#include <selinux/selinux.h>
+
+	int getcon(security\_context\_t *context);
+
+	int getprevcon(security\_context\_t *context);
+
+	int getpidcon(pid\_t pid, security\_context\_t *context);
+
+	int getpeercon(int fd, security\_context\_t *context);
+
+	int setcon(security\_context\_t context);
+\end{lstlisting}
