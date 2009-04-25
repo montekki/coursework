@@ -1,6 +1,6 @@
 
 \bigskip 
-{\bfseries Существующий в SELinux метод динамического 
+\subsection{Существующий в SELinux метод динамического 
 переключения контекста} 
 
 В 2004-м году в SELinux началась работа над системой 
@@ -19,22 +19,22 @@
 \begin{lstlisting} 
 #include <selinux/selinux.h>
 
-	int getcon(security\_context\_t *context);
+	int getcon(security_context_t *context);
 
-	int getprevcon(security\_context\_t *context);
+	int getprevcon(security_context_t *context);
 
-	int getpidcon(pid\_t pid, security\_context\_t *context);
+	int getpidcon(pid_t pid, security_context_t *context);
 
-	int getpeercon(int fd, security\_context\_t *context);
+	int getpeercon(int fd, security_context_t *context);
 
-	int setcon(security\_context\_t context);
+	int setcon(security_context_t context);
 \end{lstlisting}
 
 \bigskip 
 Логика работы системы динамических изменений контекстов. 
 
-Основной целью данной системы является предоатвление 
-возможсности доверенному приложению изменять свои права
+Основной целью данной системы является предоставление 
+возможности доверенному приложению изменять свои права
 непосредственно в процессе выполнения, отказываясь от 
 определенных прав, когда они не нужны и запрашивая 
 некоторые права, когда в них есть необходимость. 
