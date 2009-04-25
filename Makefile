@@ -15,3 +15,6 @@ $(coursework).ps:$(coursework).tex
 pdf: $(coursework).pdf
 
 ps: $(coursework).ps
+
+defalult: pdf
+
