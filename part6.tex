@@ -84,3 +84,69 @@ typedef struct dyntran_info {
 постоянно производить приведение целочисленных идентификаторов
 к их строковму представлению и обратно. 
 
+Получить целочисленное представление контекста 
+безопасности из строкового можно при помощи 
+функции 
+\begin{lstlisting}
+#include <sepol/policydb/services.h>
+
+int sepol_context_to_sid(const sepol_security_context_t scontext,/*IN*/
+		 size_t scontext_len,    /* IN */
+		 sepol_security_id_t * out_sid); /* OUT */
+\end{lstlisting}
+
+\bigskip
+
+Используя лексический и синтаксический разбор 
+строится бинарный файл с указанной структурой. 
+При этом, данная утилита тесно интегрируется 
+с политикой. Стоит отметить, что создание 
+конфигурационного файла, отдельного от политики
+позволяет применять все изменения в нем прямо 
+на ходу, без пересборки основной политики и без
+перезагрузки системы. В ряде случаев это помогает 
+экономить время и не останавливать работу системы.
+
+\bigskip
+Проведем несколько тестов компилятора конфигурационных
+данных. Рассмотрим его на следующем файле, который 
+содержит некоторую информацию о двух изменениях 
+типов. 
+
+\bigskip
+\begin{lstlisting}
+system_u:system_r:kernel_t system_u:object_r:security_t 080456AA
+system_u:object_r:fs_t     system_u:object_r:file_t     0804234B
+\end{lstlisting}
+
+\bigskip
+Если запустить в отладочном режиме 
+checkpolicy и проверить идентификаторы,
+соотвествующие данным строковым контекстам, 
+мы обнаружим, что они равны 1,2,4 и 5. Дадим 
+на вход нашему модулю данный файл. На выходе 
+получим (с отадочными комментариями)
+
+\begin{lstlisting}
+Got token:system_u:system_r:kernel_t
+The sid of the token is: 1
+Got token:system_u:object_r:security_t
+The sid of the token is: 2
+Got token:080456AA
+The address of the bpt is 134502058
+Got token:system_u:object_r:fs_t
+The sid of the token is: 4
+Got token:system_u:object_r:file_t
+The sid of the token is: 5
+Got token:0804234B
+The address of the bpt is 134488907
+\end{lstlisting}
+
+\bigskip
+Очевидно, что транслятор работает 
+правильно. Заметим, что он должен статически
+связываться с libsepol~--- библиотекой 
+работы с бинарными файлами политик. 
+
+
+
