@@ -2,7 +2,7 @@
 \subsection{AppArmor}
 
 Во многом схож с SELinux, использует LSM.
-В отличии от SELinux, AppArmor не использует
+В отличие от SELinux, AppArmor не использует
 явную разметку всех объектов в системе.
  AppArmor контролирует поведение 
 приложений, опираясь на политики, которые являются 
@@ -57,19 +57,16 @@ reload (перезагрузка профилей), status (информация
 профиля выглядит примерно так: 
 
 \bigskip
-\begin{flushleft}
-\texttt{\#include <tunables/global> \\  
-/usr/bin/man { \\ 
-	\#include <abstractions/base> \\
-	\#include <abstractions/nameservice> \\
-	capability setgid, \\
-	capability setuid, \\
-	/usr/lib/man-db/man Px,}\\ 
+\begin{lstlisting}
+#include <tunables/global>  
+/usr/bin/man { 
+	#include <abstractions/base>
+	#include <abstractions/nameservice>
+	capability setgid,
+	capability setuid,
+	/usr/lib/man-db/man Px,} 
 }
-{\sloppy
-
-}
-\end{flushleft}
+\end{lstlisting}
 
 \bigskip
 Профиль состоит из файлов, каталогов с указанием полных 
@@ -84,7 +81,7 @@ Ux — защищенное неограниченное исполнение, m
 скопировать в каталог /etc/apparmor.d. 
 
 \bigskip
-{\bfseries Предоставляемые системой методы контроля 
+{\bfseries Методы контроля 
 за внутренним состоянием приложения} 
 
 Система предоставляет возможность смены

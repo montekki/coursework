@@ -148,5 +148,57 @@ The address of the bpt is 134488907
 связываться с libsepol~--- библиотекой 
 работы с бинарными файлами политик. 
 
+\bigskip
+\subsection{Изменения в коде ядра}
+Особенностью реализации LSM является то, 
+что доступ к реализации методов безопасности 
+имеет лишь код ядра, они не экспортируются для 
+модулей. При этом есть некоторые функции, 
+которые экспортируются из SELinux, они описаны 
+в файле ./linux/security/selinux/exports.c. 
+Предлагается перенести реализацию методов
+изменения контекста и получения информации 
+о контексте приложения из selinux/hooks.c в 
+сам сервер безопасности в selinux/ss/services.c
+и экспортировать их в ядро из exports.c. При этом
+вместо функций, реализующих реакцию на запись 
+в интерфейсы /proc/PID/ в hooks.c предлагается 
+заменить заглушками, которые ничего не делают. 
+Действительно, отсутствует необходимость в 
+двух механизмах смены доменов приложений, 
+кроме этого, было бы правильно полностью 
+убрать получение информации об изменении 
+доменов от самих пользовательских приложений
+из ядра. Таким образом в exports.c появятся две 
+новые функции 
 
+\bigskip 
+\begin{lstlisting}
+int selinux_kern_getprocattr(struct task_struct *p,
+		char *name,char **value)
+{
+	if (selinux_enabled)
+		return security_kern_getprocattr(p,name,value);
+	else {
+		*value = NULL;
+		return 0;
+	}
+}
+EXPORT_SYMBOL_GPL(selinux_kern_getprocattr);
 
+int selinux_kern_setprocattr(struct task_struct *p, 
+		char *name, void *value, size_t size)
+{
+	if (selinux_enabled)
+		return security_kern_setprocattr(p,name,value,size);
+	else {
+		value = NULL;
+		return 0;
+	}
+}
+EXPORT_SYMBOL_GPL(selinux_kern_setprocattr);
+\end{lstlisting} 
+
+\bigskip 
+Данные функции позволяют получать и 
+изменять контекст приложения из модуля. 
