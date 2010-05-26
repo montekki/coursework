@@ -1,0 +1,144 @@
+\begin{tikzpicture}[
+    grow=right, 
+    level 1/.style={sibling distance=3.5cm,level distance=5.2cm},
+    level 2/.style={sibling distance=3.5cm, level distance=6.7cm},
+    edge from parent/.style={very thick,draw=blue!40!black!60,
+        shorten >=5pt, shorten <=5pt},
+    edge from parent path={(\tikzparentnode.east) -- (\tikzchildnode.west)},
+    kant/.style={text width=2cm, text centered, sloped},
+    every node/.style={text ragged, inner sep=2mm},
+    cir/.style={circle, shade, top color=white,
+    bottom color=blue!50!black!20, draw=blue!40!black!60, very
+    thick },
+    cirr/.style={circle, shade, top color=white,
+    bottom color=red!50!black!20, draw=red!40!black!60, very
+    thick },
+    dr/.style={diamond, draw, shade,  top color=white,
+    bottom color=red!50!black!20, draw=red!40!black!60, very
+    thick},
+    bd/.style={draw=blue!50!white, line width=1pt, dash pattern=on 1pt off 4pt on 6pt off 4pt,
+                                rectangle, rounded corners},
+    d/.style={diamond, draw, shade,  top color=white,
+    bottom color=blue!50!black!20, draw=blue!40!black!60, very
+    thick},
+    bwt/.style = {rectangle, draw,  text width=5em, text centered, minimum height=2em, draw=white, fill=white}]
+
+
+\node[cir] (1) {};
+\node[cirr, below of=1, text width=1mm, node distance=1.8cm] (if1exit1) {$1:a^{1}\ $};
+\node[cir, below of=if1exit1, node distance=1.8cm] (203) {};
+\node[cirr, below of=203, node distance=1.8cm] (while19) {$2:b^{1}$};
+\node[cirr, below of=while19, node distance=1.8cm] (55) {$c^{1}$};
+
+
+\node[cir, below of=55, node distance=1.8cm] (10) {};
+
+\node[cirr, below of=10, node distance=2cm] (if512013) {$3:d^{1}$};
+
+\node[cir, below of=if512013, node distance=2cm] (14) {};
+
+\node[cirr, below of=14, node distance=2cm] (if615016) {$4:e^{1}$};
+
+\node[cirr, below of=if615016, node distance=2cm] (if717018) {$5:f^{1}$};
+
+\node[cirr, below of=if717018, node distance=2cm] (if819020) {$6:j^{1}$};
+
+\node[cir, below of=if819020, node distance=2cm] (21) {};
+
+\node[cirr, below of=21, node distance=2cm] (2223) {$7:h^{2}$};
+
+\node[cirr, below of=2223, node distance=2cm] (if10252627) {$8:k^{2}$};
+
+
+\node[d, below of=if10252627, node distance=1.8cm] (if13) {};
+\node[bwt, below of=if13, node distance=1.8cm] (bw) {};
+
+\node[d, left of=bw, node distance=2.5cm] (while2) {};
+\node[d,right of=bw, node distance=2.5cm] (while3) {};
+
+\node[cirr, below of=while3, node distance=2.5cm] (switch1) {$9:n^{4},m^{4},l^{2},o^{4},p^{4}$};
+
+\node[d, below of=while2, node distance=1.8cm] (if14) {};
+
+\node[cirr, below of=if14, node distance=2cm] (switch2) {$10:s^{4},r^{4},t^{2}$};
+
+\draw[->] (1) -- (if1exit1);
+\draw[->] (if1exit1) -- (203);
+\draw[->] (203) -- (while19);
+\draw[->] (while19) -- (55);
+\draw[->] (55) -- (10);
+\draw[->] (10) -- (if512013);
+\draw[->] (if512013) -- (14);
+\draw[->] (14) -- (if615016);
+\draw[->] (if615016) -- (if717018);
+
+\draw[->] (if717018) -- (if819020);
+\draw[->] (if819020) -- (21);
+
+
+\draw[->] (21) -- (2223);
+
+\draw[->] (2223) -- (if10252627);
+\draw[->] (if10252627) -- (if13);
+
+\draw[->] (if13) -- (while2);
+\draw[->] (if13) -- (while3);
+
+
+\draw[->] (while3) -- (switch1);
+
+\path (switch1) edge[pil,->, bend left=100] node[auto] {} (while3);
+\path (if14.west) edge[pil,->, bend left=45] node[auto] {} (while2);
+
+
+\draw[->] (while2) -- (if14);
+\draw[->] (if14) -- (switch2);
+
+\path (switch2) edge[pil,->, bend left=100] node[auto] {} (while2);
+
+
+
+\node (12c) [bd,  inner sep=2mm, fit = (1)  (if1exit1) (203) (while19) (55)] {};
+
+\node (3456c) [bd,  inner sep=2mm, fit = (10)  (if512013) (if615016) (14) (21) (if717018) (if819020)] {};
+\node (10b) [bd,  inner sep=2mm, fit = (while2)  (if14) (switch2)] {};
+\node (9b) [bd,  inner sep=2mm, fit = (switch1) (while3)] {};
+% 
+% \node (whilecnf) [bd,  inner sep=4mm, fit =  (if2) (if3) (if4) (if9) (while1) (5) (607) (8) (9)] {};
+% 
+% \node (if5d) [bd,  inner sep=2mm, fit = (if5) (12013)] {};
+% \node (if6d) [bd,   inner sep=2mm,fit = (if6) (15016)] {};
+% \node (if7d) [bd,   inner sep=2mm,fit = (if7) (17018)] {};
+% \node (if8d) [bd,   inner sep=2mm,fit = (if8) (19020)] {};
+% 
+% \node (2223) [bd,  inner sep=4mm, fit = (22) (23)] {};
+% \node (auth) [bd,   inner sep=4mm,fit = (exit24) (return25) (return26) (if10) (if11) (if12) (exit27)] {};
+% 
+% % \draw[->] (switch2) -- (2help);
+% % \draw[->] (switch2) -- (2add);
+% % \draw[->] (switch2) -- (2list);
+% % \draw[->] (switch2) -- (2show);
+% % \draw[->] (switch2) -- (2desc);
+% % \draw[->] (switch2) -- (2quit);
+% 
+% \node (switch1d) [bd,   inner sep=4mm,fit = (1help) (1add) (1list) (1show) (1desc) (1quit) (switch1)] {};
+% 
+% \node (switch2d) [bd,   inner sep=4mm,fit = (2help) (2add) (2list) (2show) (2desc) (2quit) (switch2)] {};
+% 
+\node at (12c.west) [left, inner sep=3mm] {12};
+\node at (3456c.west) [left, inner sep=3mm] {3456};
+\node at (10b.west) [left, inner sep=3mm] {$10^{'}$};
+\node at (9b.west) [left, inner sep=3mm] {$9^{'}$};
+
+% \node at (whilecnf.west) [left, inner sep=3mm] {2};
+% \node at (if5d.west) [left, inner sep=3mm] {3};
+% \node at (if6d.west) [left, inner sep=3mm] {4};
+% \node at (if7d.west) [left, inner sep=3mm] {5};
+% \node at (if8d.west) [left, inner sep=3mm] {6};
+% \node at (2223.west) [left, inner sep=3mm] {7};
+% \node at (auth.west) [left, inner sep=3mm] {8};
+% 
+% \node at (switch1d) [right, inner sep=2.8cm] {9};
+% \node at (switch2d) [left, inner sep=3.1cm] {10};
+
+\end{tikzpicture}

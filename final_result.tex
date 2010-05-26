@@ -1,0 +1,55 @@
+\begin{tikzpicture}[
+    grow=right, 
+    level 1/.style={sibling distance=3.5cm,level distance=5.2cm},
+    level 2/.style={sibling distance=3.5cm, level distance=6.7cm},
+    edge from parent/.style={very thick,draw=blue!40!black!60,
+        shorten >=5pt, shorten <=5pt},
+    edge from parent path={(\tikzparentnode.east) -- (\tikzchildnode.west)},
+    kant/.style={text width=2cm, text centered, sloped},
+    every node/.style={text ragged, inner sep=2mm},
+    cir/.style={circle, shade, top color=white,
+    bottom color=blue!50!black!20, draw=blue!40!black!60, very
+    thick },
+    cirr/.style={circle, shade, top color=white,
+    bottom color=red!50!black!20, draw=red!40!black!60, very
+    thick },
+    dr/.style={diamond, drawshade,  top color=white,
+    bottom color=red!50!black!20, draw=red!40!black!60, very
+    thick},
+    bd/.style={draw=blue!50!white, line width=1pt, dash pattern=on 1pt off 4pt on 6pt off 4pt,
+                                rectangle, rounded corners},
+pil/.style={
+	->,
+	thick,
+	shorten <=2pt,
+	shorten >=2pt,},
+
+
+    d/.style={diamond, drawshade,  top color=white,
+    bottom color=blue!50!black!20, draw=blue!40!black!60, very
+    thick},
+    bwt/.style = {rectangle, draw,  text width=5em, text centered, minimum height=2em, draw=white, fill=white}]
+
+
+\node[cirr] (1) {7};
+
+\node[cirr, below of=1, node distance=3cm] (3) {2};
+
+\node[cirr, below of=3, node distance=3cm] (4) {2};
+
+\node[d, below of=4, node distance=3cm] (if) {};
+
+\node[cirr, below of=if, left of=if, node distance=3cm] (10) {10};
+
+\node[cirr, below of=if, right of=if, node distance=3cm] (9) {18};
+
+
+
+\draw[->] (1) -- (3);
+\draw[->] (3) -- (4);
+\draw[->] (4) -- (if);
+\draw[->] (if) -- (9);
+\draw[->] (if) -- (10);
+
+
+\end{tikzpicture}

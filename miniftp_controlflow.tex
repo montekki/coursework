@@ -1,0 +1,216 @@
+\begin{tikzpicture}[
+    grow=right, 
+    level 1/.style={sibling distance=3.5cm,level distance=5.2cm},
+    level 2/.style={sibling distance=3.5cm, level distance=6.7cm},
+    edge from parent/.style={very thick,draw=blue!40!black!60,
+        shorten >=5pt, shorten <=5pt},
+    edge from parent path={(\tikzparentnode.east) -- (\tikzchildnode.west)},
+    kant/.style={text width=2cm, text centered, sloped},
+    every node/.style={text ragged, inner sep=2mm},
+    cir/.style={circle, shade, top color=white,
+    bottom color=blue!50!black!20, draw=blue!40!black!60, very
+    thick },
+    cirr/.style={circle, shade, top color=white,
+    bottom color=red!50!black!20, draw=red!40!black!60, very
+    thick },
+    dr/.style={diamond, draw, shade,  top color=white,
+    bottom color=red!50!black!20, draw=red!40!black!60, very
+    thick},
+    d/.style={diamond, draw, shade,  top color=white,
+    bottom color=blue!50!black!20, draw=blue!40!black!60, very
+    thick}]
+\node[cir] (1) {};
+
+\node[dr, below of=1] (if1) {};
+\node[cir, right of=if1] (exit1) {};
+\node[cir, below of=if1] (203) {};
+\node[dr, below of=203] (while1) {};
+\node[d, below of=while1] (if9) {};
+\node[d, below of=if9] (if2) {};
+\node[cir, below of=if2] (5) {};
+
+\node[d, below of=5] (if3) {};
+\node[cir, right of=if3] (607) {};
+
+
+\node[d, below of=if3] (if4) {};
+\node[cir, right of=if4] (8) {};
+
+\node[cir, below of=if4] (9) {};
+\node[cirr, below of=9] (55) {};
+
+\node[cir, below of=55, node distance=1.5cm] (10) {};
+
+\node[dr, below of=10] (if5) {};
+\node[cir, right of=if5] (12013) {};
+
+
+\node[cir, below of=if5] (14) {};
+
+\node[dr, below of=14] (if6) {};
+\node[cir, right of=if6] (15016) {};
+
+\node[dr, below of=if6] (if7) {};
+\node[cir, right of=if7] (17018) {};
+
+\node[dr, below of=if7] (if8) {};
+\node[cir, right of=if8] (19020) {};
+
+\node[cir, below of=if8] (21) {};
+
+\node[cir, below of=21, node distance=1.5cm] (22) {};
+\node[cirr, below of=22] (23) {};
+
+\node[cirr, below of=23] (auth) {};
+
+\node[d, below of=auth] (if10) {};
+\node[cir, right of=if10] (exit24) {};
+
+\node[d, below of=if10] (if11) {};
+\node[cir, left of=if11] (return25) {};
+
+\node[d, below of=if11] (if12) {};
+\node[cir, right of=if12] (return26) {};
+\node[cir, right of=if12, below of=if12] (exit27) {};
+
+
+\node[d, below of=if12] (if13) {};
+\node[d, below of=if13, left of=if13, node distance=3.6cm] (while2) {};
+\node[d, below of=if13, right of=if13, node distance=3.6cm] (while3) {};
+
+\node[d, below of=while3] (switch1) {};
+\node[cirr, below of=switch1] (1help) {};
+\node[cirr, left of=1help] (1add) {};
+\node[cirr, left of=1add] (1list) {};
+\node[cirr, right of=1help] (1show) {};
+\node[cirr, right of=1show] (1desc) {};
+\node[cir, right of=1desc] (1quit) {};
+
+\node[cir, below of=1help] (1vir) {};
+
+\node[d, below of=while2] (if14) {};
+
+\node[d, below of=if14] (switch2) {};
+\node[cirr, below of=switch2] (2help) {};
+\node[cir, left of=2help] (2add) {};
+\node[cirr, left of=2add] (2list) {};
+\node[cirr, right of=2help] (2show) {};
+\node[cir, right of=2show] (2desc) {};
+\node[cir, right of=2desc] (2quit) {};
+
+\node[cir, below of=2help] (2vir) {};
+
+\draw[->] (1) -- (if1);
+\draw[->] (if1) -- (exit1);
+\draw[->] (if1) -- (203);
+\draw[->] (203) -- (while1);
+\draw[->] (while1) -- (if9);
+
+\draw[->] (if9) -- (if2);
+\draw[->] (if2) -- (5);
+\draw[->] (5) -- (if3);
+\draw[->] (if3) -- (if4);
+\draw[->] (if4) -- (9);
+\draw[->] (9) -- (55);
+\draw[->] (55) -- (10);
+\draw[->] (10) -- (if5);
+\draw[->] (if5) -- (14);
+\draw[->] (14) -- (if6);
+\draw[->] (if6) -- (if7);
+
+\draw[->] (if7) -- (if8);
+\draw[->] (if8) -- (21);
+
+
+
+\path (if9) edge[pil,->, bend right=45] node[auto] {} (while1);
+\path (9) edge[pil,->, bend left=45] node[auto] {} (while1);
+
+\draw[->] (if3) -- (607);
+\draw[->] (607) -- (if4);
+
+\draw[->] (if4) -- (8);
+\draw[->] (8) -- (9);
+
+\draw[->] (if5) -- (12013);
+
+\draw[->] (if6) -- (15016);
+
+\draw[->] (if7) -- (17018);
+
+\draw[->] (if8) -- (19020);
+
+
+\draw[->] (22) -- (23);
+
+\draw[->] (23) -- (auth);
+\draw[->] (auth) -- (if10);
+\draw[->] (if10) -- (exit24);
+
+\draw[->] (if10) -- (if11);
+\draw[->] (if11) -- (return25);
+
+\draw[->] (if11) -- (if12);
+\draw[->] (if12) -- (return26);
+
+\draw[->] (if12.south) -- (exit27);
+
+\draw[->] (return26) -- (if13);
+\draw[->] (return25) -- (if13);
+
+\draw[->] (if13) -- (while2);
+\draw[->] (if13) -- (while3);
+
+
+\draw[->] (while3) -- (switch1);
+\draw[->] (switch1) -- (1help);
+\draw[->] (switch1) -- (1add);
+\draw[->] (switch1) -- (1list);
+\draw[->] (switch1) -- (1show);
+\draw[->] (switch1) -- (1desc);
+\draw[->] (switch1) -- (1quit);
+
+\draw[->] (1help) -- (1vir);
+\draw[->] (1add) -- (1vir);
+\draw[->] (1list) -- (1vir);
+\draw[->] (1show) -- (1vir);
+\draw[->] (1desc) -- (1vir);
+
+\path (1vir) edge[pil,->, bend left=100] node[auto] {} (while3);
+\path (if14.west) edge[pil,->, bend left=45] node[auto] {} (while2);
+
+
+\draw[->] (while2) -- (if14);
+\draw[->] (if14) -- (switch2);
+
+\draw[->] (switch2) -- (2help);
+\draw[->] (switch2) -- (2add);
+\draw[->] (switch2) -- (2list);
+\draw[->] (switch2) -- (2show);
+\draw[->] (switch2) -- (2desc);
+\draw[->] (switch2) -- (2quit);
+
+\draw[->] (2help) -- (2vir);
+\draw[->] (2add) -- (2vir);
+\draw[->] (2list) -- (2vir);
+\draw[->] (2show) -- (2vir);
+\draw[->] (2desc) -- (2vir);
+
+\path (2vir) edge[pil,->, bend left=100] node[auto] {} (while2);
+
+\draw[->] (21) -- (22) ;
+
+% \node (parsercnf) [blue dotted, fit = (exit1) (if1) (if2) (if3) (if4) (if9) (while1) (1) (203) (5) (607) (8) (9)] {};
+% 
+% \node (socketconn) [blue dotted, fit = (if5) (if6) (if7) (if8)  (12013) (15016) (17018) (19020) (21) (10) (14)] {};
+% 
+% \node (getauthdata) [blue dotted, fit = (22) (23)] {};
+% 
+% \node (auth) [blue dotted, fit = (if10) (if12) (if11)  (24) (25) (26) (27) ] {};
+% 
+% 
+% \node at (parsercnf.west) [above, inner sep=1cm] {funct\_parsercnf};
+% \node at (socketconn.west) [above, inner sep=1cm] {funct\_socketconnect};
+% \node at (getauthdata.west) [above, inner sep=1cm] {funct\_getauthdata};
+% \node at (auth.west) [above, inner sep=1cm] {funct\_auth};
+\end{tikzpicture}

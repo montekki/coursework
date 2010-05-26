@@ -8,7 +8,18 @@
 %\usepackage{amstext}
 %\usepackage{amssymb}
 %\usepackage{lscape}
+\usepackage{tikz}
 \usepackage{verbatim}
+\usetikzlibrary{shapes,arrows,snakes}
+
+\usetikzlibrary{shapes.geometric,shapes.arrows,decorations.pathmorphing}
+\usetikzlibrary{matrix,chains,scopes,positioning,arrows,fit,arrows,backgrounds}
+
+
+
+% PDF search & cut'n'paste
+\usepackage{cmap}
+
 %\usepackage{eskdpz}
 %\usepackage{makecell}
 %\usepackage{multirow}
@@ -34,8 +45,68 @@
 \usepackage[left=3cm,right=2.5cm,top=3cm,bottom=3cm,bindingoffset=0cm]{geometry}
 
 \renewcommand{\rmdefault}{ftm}
+ \tikzstyle{de} = [diamond, draw,shade, top color=white,
+    bottom color=blue!50!black!20, draw=blue!40!black!60, very
+    thick, text centered, rounded corners, text width=6em, text badly centered, node distance=3cm, inner sep=0pt]
+
+\usepackage{wrapfig}
+\newenvironment{outerlist}[1][\enskip\textbullet]%
+        {\begin{itemize}[#1]}{\end{itemize}%
+         \vspace{-.6\baselineskip}}
+ \tikzstyle{decision} = [diamond, draw,shade,  top color=white,
+    bottom color=blue!50!black!20, draw=blue!40!black!60, very
+    thick, text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+
+\tikzstyle{pil}=[ ->,
+	thick,
+	shorten <=2pt,
+	shorten >=2pt]j
+
+ \tikzstyle{block} = [rectangle, draw,  text width=5em, text centered, minimum height=4em, top color=white,  bottom color=blue!50!black!20, draw=blue!40!black!60, very thick, rounded corners]
+
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+   
+\tikzset{blue dotted/.style={draw=blue!50!white, line width=1pt,
+                               dash pattern=on 1pt off 4pt on 6pt off 4pt,
+                                inner sep=4mm, rectangle, rounded corners}}
+\tikzstyle{blockwhite} = [rectangle, draw,  text width=5em, text centered, minimum height=4em, draw=white, fill=white]
+\tikzstyle{bl} = [block, shade, top color=white,
+    bottom color=blue!50!black!20, draw=blue!40!black!60, very
+    thick, text width=10em, text centered, rounded corners, minimum height=4em]
+
+\tikzstyle{step} = [ elipse, text width=5em, text centered, minimum height=4em,top color=white,
+    bottom color=blue!50!black!20, draw=blue!40!black!60, very thick]
+
 
 \begin{document}
+\tikzstyle{de} = [diamond, draw,shade, top color=white,
+    bottom color=blue!50!black!20, draw=blue!40!black!60, very
+    thick, text centered, rounded corners, text width=6em, text badly centered, node distance=3cm, inner sep=0pt]
+
+ \tikzstyle{decision} = [diamond, draw,shade,  top color=white,
+    bottom color=blue!50!black!20, draw=blue!40!black!60, very
+    thick, text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+
+ \tikzstyle{block} = [rectangle, draw,  text width=5em, text centered, minimum height=4em, top color=white,  bottom color=blue!50!black!20, draw=blue!40!black!60, very thick, rounded corners]
+
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+   
+\tikzset{blue dotted/.style={draw=blue!50!white, line width=1pt,
+                               dash pattern=on 1pt off 4pt on 6pt off 4pt,
+                                inner sep=4mm, rectangle, rounded corners}}
+\tikzstyle{blockwhite} = [rectangle, draw,  text width=5em, text centered, minimum height=4em, draw=white, fill=white]
+\tikzstyle{bl} = [block, shade, top color=white,
+    bottom color=blue!50!black!20, draw=blue!40!black!60, very
+    thick, text width=10em, text centered, rounded corners, minimum height=4em]
+
+\tikzstyle{step} = [ elipse, text width=5em, text centered, minimum height=4em,top color=white,
+    bottom color=blue!50!black!20, draw=blue!40!black!60, very thick]
+
+
 \input{title.tex}
 \input{part1.tex}
 \input{part2.tex}
